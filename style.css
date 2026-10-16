@@ -1,0 +1,614 @@
+
+/* ========================================
+   1. Базовые настройки
+======================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+html {
+    background: #0c1a16;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow: hidden;
+    background: #0c1a16;
+    color: #fff;
+    font-family: "Mulish", "Montserrat", sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* ========================================
+   2. Основная карточка
+======================================== */
+
+.card {
+    position: relative;
+    isolation: isolate;
+    container-type: inline-size;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    min-width: 0;
+    overflow: hidden;
+    background: #17382f;
+}
+
+
+/* ========================================
+   3. Фотография и фон
+======================================== */
+
+.card__photo {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    background: #17382f;
+    pointer-events: none;
+}
+
+/* Размытый фон */
+
+.card__photo::before {
+    content: "";
+    position: absolute;
+    inset: -4%;
+    background: url("images/fotka1.PNG") center / cover no-repeat;
+    filter: blur(30px);
+    opacity: 0.65;
+}
+
+/* Основная фотография */
+
+.card__photo::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 35%;
+    width: 44%;
+
+    background-image: url("images/fotka1.PNG");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.45) 4%,
+        #000 13%,
+        #000 88%,
+        rgba(0, 0, 0, 0.65) 96%,
+        transparent 100%
+    );
+
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.45) 4%,
+        #000 13%,
+        #000 88%,
+        rgba(0, 0, 0, 0.65) 96%,
+        transparent 100%
+    );
+}
+
+
+/* ========================================
+   4. Декоративные линии
+======================================== */
+
+/* Вертикальная линия слева */
+
+.card::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: 6.2cqw;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* Движущийся световой акцент */
+
+.card::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 6.2cqw;
+    width: 2px;
+    height: 9cqw;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(255, 255, 255, 0.9),
+        transparent
+    );
+    animation: lightTravel 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+
+/* ========================================
+   5. Левая колонка
+======================================== */
+
+.main {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* Имя и описание */
+
+.hero {
+    position: absolute;
+    left: 9.8cqw;
+    top: 22%;
+    width: 29cqw;
+    max-width: 36%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    pointer-events: auto;
+}
+
+.hero__title {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    font-family: "Archivo", "Montserrat", sans-serif;
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: clamp(52px, 6cqw, 100px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-align: left;
+
+    animation: titleReveal 1s ease-out both;
+}
+
+.hero__text {
+    display: block;
+    width: 100%;
+    margin: 2.4cqw 0 0;
+    padding: 0;
+
+    font-size: clamp(15px, 1.3cqw, 20px);
+    line-height: 1.7;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.94);
+    text-align: left;
+    overflow-wrap: break-word;
+
+    animation: textReveal 1s ease-out 0.2s both;
+}
+
+
+/* ========================================
+   6. Правая колонка
+======================================== */
+
+.side {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 24.8cqw;
+    padding: 0 3.1cqw;
+    background: rgba(12, 40, 33, 0.28);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+
+/* ========================================
+   7. Социальные сети
+======================================== */
+
+.side__follow {
+    position: absolute;
+    top: 4.2%;
+    right: 3.1cqw;
+    left: 3.1cqw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1cqw;
+}
+
+.side__follow-title {
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-family: "Archivo", sans-serif;
+    font-stretch: 125%;
+    font-size: clamp(14px, 1.2cqw, 19px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    gap: 1.5cqw;
+}
+
+.social a {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.social svg {
+    display: block;
+    width: clamp(17px, 1.5cqw, 23px);
+    height: clamp(17px, 1.5cqw, 23px);
+    fill: rgba(255, 255, 255, 0.8);
+    color: #fff;
+    transition: opacity 0.2s ease;
+}
+
+.social a:hover svg {
+    opacity: 0.65;
+}
+
+
+/* ========================================
+   8. Информация справа
+======================================== */
+
+.info {
+    position: absolute;
+    top: 24%;
+    right: 3.1cqw;
+    left: 3.1cqw;
+    display: flex;
+    flex-direction: column;
+    gap: 3.2cqw;
+}
+
+/* Заголовки разделов */
+
+.info dt {
+    color: rgba(255, 255, 255, 0.68);
+    font-family: "Archivo", "Montserrat", sans-serif;
+    font-stretch: 125%;
+    font-size: clamp(14px, 1.2cqw, 19px);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Описания разделов */
+
+.info dd {
+    margin-top: 1cqw;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: clamp(15px, 1.3cqw, 20px);
+    font-weight: 500;
+    line-height: 1.55;
+    overflow-wrap: break-word;
+}
+
+.info dd a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: border-color 0.2s;
+}
+
+.info dd a:hover {
+    border-color: #fff;
+}
+
+
+/* ========================================
+   9. Кнопка Write Me
+======================================== */
+
+.trailer {
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 10%;
+    left: 3.1cqw;
+    display: flex;
+    align-items: center;
+    gap: 1cqw;
+    width: max-content;
+    height: 5cqw;
+    min-height: 48px;
+    overflow: visible;
+    background: transparent;
+}
+
+/* Дополнительное изображение кнопки отключено */
+
+.trailer__photo {
+    display: none;
+}
+
+/* Круг с треугольником */
+
+.trailer__play {
+    position: relative;
+    top: auto;
+    left: auto;
+    flex-shrink: 0;
+    width: clamp(32px, 2.9cqw, 44px);
+    height: clamp(32px, 2.9cqw, 44px);
+    margin: 0;
+    transform: none;
+    border-radius: 50%;
+    background: #fff;
+}
+
+/* Треугольник внутри круга */
+
+.trailer__play::after {
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    border-style: solid;
+    border-width: 0.65cqw 0 0.65cqw 1cqw;
+    border-color: transparent transparent transparent #111;
+}
+
+/* Надпись Write Me */
+
+.trailer__label {
+    position: static;
+    transform: none;
+    font-family: "Archivo", sans-serif;
+    font-size: clamp(13px, 1.05cqw, 17px);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+.trailer:hover .trailer__label {
+    opacity: 0.7;
+}
+
+
+/* ========================================
+   10. Анимации
+======================================== */
+
+@keyframes titleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes textReveal {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes lightTravel {
+    0% {
+        transform: translateY(-10cqw);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(65cqw);
+        opacity: 0;
+    }
+}
+
+
+/* ========================================
+   11. Уменьшение анимации по настройкам системы
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__title,
+    .hero__text,
+    .card::after {
+        animation: none;
+    }
+}
+
+
+/* ========================================
+   12. Мобильная версия
+======================================== */
+
+@media (max-width: 700px) {
+    body {
+        overflow: auto;
+    }
+
+    .card {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .card__photo {
+        position: absolute;
+        inset: 0;
+        min-height: 100%;
+    }
+
+    /* Левая колонка */
+
+    .hero {
+        top: 20%;
+        left: 8cqw;
+        width: 42cqw;
+        max-width: 48%;
+    }
+
+    .hero__title {
+        font-size: clamp(38px, 8cqw, 60px);
+    }
+
+    .hero__text {
+        margin-top: 3cqw;
+        font-size: clamp(12px, 2.2cqw, 16px);
+        line-height: 1.6;
+    }
+
+    /* Правая колонка */
+
+    .side {
+        width: 34cqw;
+        padding: 0 2.5cqw;
+    }
+
+    .side__follow {
+        top: 3%;
+        right: 2.5cqw;
+        left: 2.5cqw;
+        flex-wrap: wrap;
+        gap: 1.5cqw;
+    }
+
+    .side__follow-title {
+        font-size: clamp(10px, 1.8cqw, 14px);
+    }
+
+    .social {
+        gap: 1.5cqw;
+    }
+
+    .social svg {
+        width: 2.5cqw;
+        height: 2.5cqw;
+    }
+
+    /* Информация */
+
+    .info {
+        top: 12%;
+        right: 2.5cqw;
+        left: 2.5cqw;
+        gap: 4cqw;
+    }
+
+    .info dt {
+        font-size: clamp(10px, 1.8cqw, 14px);
+    }
+
+    .info dd {
+        margin-top: 1.2cqw;
+        font-size: clamp(11px, 1.9cqw, 15px);
+        line-height: 1.5;
+    }
+
+    /* Кнопка */
+
+    .trailer {
+        bottom: 7%;
+        left: 2.5cqw;
+        height: auto;
+        min-height: 35px;
+        gap: 1.5cqw;
+    }
+
+    .trailer__play {
+        width: 4cqw;
+        height: 4cqw;
+    }
+
+    .trailer__play::after {
+        border-width: 0.8cqw 0 0.8cqw 1.2cqw;
+    }
+
+    .trailer__label {
+        font-size: clamp(9px, 1.6cqw, 13px);
+    }
+    
+}
+/* Исправление выравнивания Nika и приветствия */
+
+.hero {
+    left: 9.8cqw !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    text-align: left !important;
+    transform: none;
+}
+
+.hero__title,
+.hero__text {
+    position: relative;
+    left: 0 !important;
+    right: auto !important;
+    width: 100%;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    text-align: left !important;
+    transform: none;
+}
+
+.hero__title {
+    margin-top: 0 !important;
+}
+
+.hero__text {
+    margin-top: 2.4cqw !important;
+}
+/* Точное визуальное выравнивание имени и приветствия */
+
+.hero__title {
+    position: relative;
+    left: -0.4cqw !important;
+}
